@@ -1,6 +1,7 @@
-# typed: false
+# typed: true
 require "cell"
-require "chunky_png"
+require "chunky_png/color"
+require "victor"
 
 class Grid
   attr_reader :rows, :columns
@@ -21,7 +22,6 @@ class Grid
 
   def configure_cells
     each_cell do |cell|
-      #puts "#{cell.row} #{cell.column}"
       row, col = cell.row, cell.column
 
       cell.north = self[row - 1, col]
@@ -32,8 +32,6 @@ class Grid
   end
 
   def [](row, column)
-    #puts "row #{row}"
-    #puts "column #{column}"
     return nil unless row.between?(0, @rows - 1)
     return nil unless column.between?(0, @grid[row].count - 1)
     @grid[row][column]
@@ -71,6 +69,7 @@ class Grid
         top << body << east_boundary
 
         south_boundary = (cell.linked?(cell.south) ? "   " : "---")
+
         corner = "+"
         bottom << south_boundary << corner
       end
@@ -103,5 +102,31 @@ class Grid
     end
 
     img
+  end
+
+  def to_svg(cell_size: 10)
+    img_width = cell_size * columns
+    img_height = cell_size * rows
+
+    svg = Victor::SVG.new(width: img_width, height: img_height)
+
+    style = { stroke: "red", stroke_width: 1 }
+    each_cell do |cell|
+      x1 = cell.column * cell_size
+      y1 = cell.row * cell_size
+
+      x2 = (cell.column + 1) * cell_size
+      y2 = (cell.row + 1) * cell_size
+
+      svg.line x1: x1, y1: y1, x2: x2, y2: y1, style: style unless cell.north
+      svg.line x1: x1, y1: y1, x2: x1, y2: y2, style: style unless cell.west
+      unless cell.linked?(cell.east)
+        svg.line x1: x2, y1: y1, x2: x2, y2: y2, style: style
+      end
+      unless cell.linked?(cell.south)
+        svg.line x1: x1, y1: y2, x2: x2, y2: y2, style: style
+      end
+    end
+    svg
   end
 end
