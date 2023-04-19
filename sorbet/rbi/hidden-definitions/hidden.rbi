@@ -2976,6 +2976,63 @@ module Bundler
   def self.unbundled_system(*args); end
 end
 
+module ChunkyPNG
+  COLOR_GRAYSCALE = ::T.let(nil, ::T.untyped)
+  COLOR_GRAYSCALE_ALPHA = ::T.let(nil, ::T.untyped)
+  COLOR_INDEXED = ::T.let(nil, ::T.untyped)
+  COLOR_TRUECOLOR = ::T.let(nil, ::T.untyped)
+  COLOR_TRUECOLOR_ALPHA = ::T.let(nil, ::T.untyped)
+  COMPRESSED_CONTENT = ::T.let(nil, ::T.untyped)
+  COMPRESSION_DEFAULT = ::T.let(nil, ::T.untyped)
+  EXTRA_BYTE = ::T.let(nil, ::T.untyped)
+  FILTERING_DEFAULT = ::T.let(nil, ::T.untyped)
+  FILTER_AVERAGE = ::T.let(nil, ::T.untyped)
+  FILTER_NONE = ::T.let(nil, ::T.untyped)
+  FILTER_PAETH = ::T.let(nil, ::T.untyped)
+  FILTER_SUB = ::T.let(nil, ::T.untyped)
+  FILTER_UP = ::T.let(nil, ::T.untyped)
+  INTERLACING_ADAM7 = ::T.let(nil, ::T.untyped)
+  INTERLACING_NONE = ::T.let(nil, ::T.untyped)
+  UNCOMPRESSED_CONTENT = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module ChunkyPNG::Chunk
+  CHUNK_TYPES = ::T.let(nil, ::T.untyped)
+end
+
+class ChunkyPNG::Chunk::Physical
+  INCHES_PER_METER = ::T.let(nil, ::T.untyped)
+end
+
+module ChunkyPNG::Color
+  BLACK = ::T.let(nil, ::T.untyped)
+  HEX3_COLOR_REGEXP = ::T.let(nil, ::T.untyped)
+  HEX6_COLOR_REGEXP = ::T.let(nil, ::T.untyped)
+  HTML_COLOR_REGEXP = ::T.let(nil, ::T.untyped)
+  MAX = ::T.let(nil, ::T.untyped)
+  MAX_EUCLIDEAN_DISTANCE_RGBA = ::T.let(nil, ::T.untyped)
+  PREDEFINED_COLORS = ::T.let(nil, ::T.untyped)
+  TRANSPARENT = ::T.let(nil, ::T.untyped)
+  WHITE = ::T.let(nil, ::T.untyped)
+end
+
+class ChunkyPNG::Datastream
+  SIGNATURE = ::T.let(nil, ::T.untyped)
+end
+
+class ChunkyPNG::Dimension
+  DIMENSION_REGEXP = ::T.let(nil, ::T.untyped)
+end
+
+class ChunkyPNG::Image
+  METADATA_COMPRESSION_TRESHOLD = ::T.let(nil, ::T.untyped)
+end
+
+class ChunkyPNG::Point
+  POINT_REGEXP = ::T.let(nil, ::T.untyped)
+end
+
 class Class
   def json_creatable?(); end
 end
@@ -3548,6 +3605,22 @@ end
 
 class Float
   include ::JSON::Ext::Generator::GeneratorMethods::Float
+end
+
+module Forwardable
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Forwardable
+  def self._compile_method(src, file, line); end
+
+  def self._delegator_method(obj, accessor, method, ali); end
+
+  def self._valid_method?(method); end
+
+  def self.debug(); end
+
+  def self.debug=(debug); end
 end
 
 module GC
@@ -5019,7 +5092,36 @@ end
 module UnicodeNormalize
 end
 
+module Victor
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
 module Warning
   extend ::Warning
 end
 
+class Zlib::Deflate
+  def initialize(*arg); end
+end
+
+class Zlib::GzipReader
+  def initialize(*arg); end
+end
+
+class Zlib::GzipReader
+  def self.zcat(*arg); end
+end
+
+class Zlib::GzipWriter
+  def initialize(*arg); end
+end
+
+class Zlib::InProgressError
+end
+
+class Zlib::InProgressError
+end
+
+class Zlib::Inflate
+  def initialize(*arg); end
+end

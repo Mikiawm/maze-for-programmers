@@ -1,7 +1,7 @@
 # typed: true
 require "cell"
 require "chunky_png/color"
-require "victor"
+require "victor/svg"
 
 class Grid
   attr_reader :rows, :columns
