@@ -13,6 +13,7 @@ GEM
       parser (>= 2.6.4.0)
       sorbet-runtime (>= 0.5.9204)
       unparser
+    ruby2d (0.12.1)
     sorbet (0.5.10767)
       sorbet-static (= 0.5.10767)
     sorbet-runtime (0.5.10767)
@@ -48,6 +49,7 @@ PLATFORMS
 
 DEPENDENCIES
   chunky_png
+  ruby2d
   sorbet
   sorbet-runtime
   tapioca

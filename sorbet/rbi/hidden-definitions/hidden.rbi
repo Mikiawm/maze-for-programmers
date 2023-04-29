@@ -4645,6 +4645,7 @@ end
 
 class Object
   include ::JSON::Ext::Generator::GeneratorMethods::Object
+  include ::Ruby2D
   include ::PP::ObjectMixin
   ARGF = ::T.let(nil, ::T.untyped)
   ARGV = ::T.let(nil, ::T.untyped)
@@ -4893,6 +4894,28 @@ end
 
 class Regexp
   def self.linear_time?(*arg); end
+end
+
+class Ruby2D::Color
+  NAMED_COLORS = ::T.let(nil, ::T.untyped)
+end
+
+Ruby2D::Colour = Ruby2D::Color
+
+class Ruby2D::Font
+  FONT_CACHE_LIMIT = ::T.let(nil, ::T.untyped)
+end
+
+class Ruby2D::Texture
+  WHITE_OPAQUE_AR = ::T.let(nil, ::T.untyped)
+end
+
+class Ruby2D::Tileset
+  DEFAULT_COLOR = ::T.let(nil, ::T.untyped)
+end
+
+class Ruby2D::Vertices
+  TEX_UNCROPPED_COORDS = ::T.let(nil, ::T.untyped)
 end
 
 class RubyVM::AbstractSyntaxTree::Node

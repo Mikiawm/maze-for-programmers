@@ -1,14 +1,15 @@
-# typed: true
+# typed: false
 require "cell"
 require "chunky_png/color"
-require "victor/svg"
+require "victor"
 
 class Grid
-  attr_reader :rows, :columns
+  attr_reader :rows, :columns, :cell_size
 
   def initialize(rows, columns)
     @rows = rows
     @columns = columns
+    @cell_size = 15
 
     @grid = prepare_grid
     configure_cells
@@ -56,6 +57,14 @@ class Grid
     each_row { |row| row.each { |cell| yield cell if cell } }
   end
 
+  def contents_of(cell)
+    " "
+  end
+
+  def background_color_for(cell)
+    nil
+  end
+
   def to_s
     output = "+" + "---+" * columns + "\n"
     each_row do |row|
@@ -63,7 +72,7 @@ class Grid
       bottom = "+"
       row.each do |cell|
         cell = Cell.new(-1, -1) unless cell
-        body = "   "
+        body = " #{contents_of(cell)} "
 
         east_boundary = (cell.linked?(cell.east) ? " " : "|")
         top << body << east_boundary
@@ -88,19 +97,25 @@ class Grid
 
     img = ChunkyPNG::Image.new(img_width + 1, img_height + 1, background)
 
-    each_cell do |cell|
-      x1 = cell.column * cell_size
-      y1 = cell.row * cell_size
+    %i[backgrounds walls].each do |mode|
+      each_cell do |cell|
+        x1 = cell.column * cell_size
+        y1 = cell.row * cell_size
 
-      x2 = (cell.column + 1) * cell_size
-      y2 = (cell.row + 1) * cell_size
+        x2 = (cell.column + 1) * cell_size
+        y2 = (cell.row + 1) * cell_size
 
-      img.line(x1, y1, x2, y1, wall) unless cell.north
-      img.line(x1, y1, x1, y2, wall) unless cell.west
-      img.line(x2, y1, x2, y2, wall) unless cell.linked?(cell.east)
-      img.line(x1, y2, x2, y2, wall) unless cell.linked?(cell.south)
+        if mode == :backgrounds
+          color = background_color_for(cell)
+          img.rect(x1, y1, x2, y2, color, color) if color
+        else
+          img.line(x1, y1, x2, y1, wall) unless cell.north
+          img.line(x1, y1, x1, y2, wall) unless cell.west
+          img.line(x2, y1, x2, y2, wall) unless cell.linked?(cell.east)
+          img.line(x1, y2, x2, y2, wall) unless cell.linked?(cell.south)
+        end
+      end
     end
-
     img
   end
 

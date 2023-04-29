@@ -1,6 +1,7 @@
 # typed: false
 class BinaryTree
   def self.on(grid)
+    grid.each_row { |row| row.each { |cell| cell.unlink_all } }
     grid.each_cell do |cell|
       neighbors = []
       neighbors << cell.north if cell.north

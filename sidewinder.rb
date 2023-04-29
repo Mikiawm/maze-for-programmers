@@ -1,6 +1,8 @@
 # typed: false
 class Sidewinder
   def self.on(grid)
+    grid.each_row { |row| row.each { |cell| cell.unlink_all } }
+
     grid.each_row do |row|
       run = []
       row.each do |cell|

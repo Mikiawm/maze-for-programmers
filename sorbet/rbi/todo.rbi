@@ -2,3 +2,4 @@
 #   srb rbi todo
 
 # typed: strong
+module YARD::Logger; end
