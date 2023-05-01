@@ -49,8 +49,7 @@ class Cell
     dark = intensity.round(3)
     bright = ((128 + (127 * intensity)) / 255).round(3)
 
-    p [dark, bright, dark]
-    Ruby2D::Color.new([dark, bright, dark, 1])
+    return Ruby2D::Color.new([dark, bright, dark, 1])
   end
 
   def distances(is_ruby2d = false)
@@ -91,6 +90,6 @@ class Cell
         frontier = new_frontier
       end
     end
-    distances
+    return distances
   end
 end

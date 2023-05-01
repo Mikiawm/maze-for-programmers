@@ -1,6 +1,6 @@
-# typed: false
+# typed: true
 require "cell"
-require "chunky_png/color"
+require "chunky_png"
 require "victor"
 
 class Grid
@@ -89,8 +89,8 @@ class Grid
   end
 
   def to_png(cell_size: 10)
-    img_width = cell_size * columns
-    img_height = cell_size * rows
+    img_width = @cell_size * columns
+    img_height = @cell_size * rows
 
     background = ChunkyPNG::Color::WHITE
     wall = ChunkyPNG::Color::BLACK
@@ -99,11 +99,11 @@ class Grid
 
     %i[backgrounds walls].each do |mode|
       each_cell do |cell|
-        x1 = cell.column * cell_size
-        y1 = cell.row * cell_size
+        x1 = cell.column * @cell_size
+        y1 = cell.row * @cell_size
 
-        x2 = (cell.column + 1) * cell_size
-        y2 = (cell.row + 1) * cell_size
+        x2 = (cell.column + 1) * @cell_size
+        y2 = (cell.row + 1) * @cell_size
 
         if mode == :backgrounds
           color = background_color_for(cell)
