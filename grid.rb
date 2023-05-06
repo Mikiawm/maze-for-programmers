@@ -65,6 +65,14 @@ class Grid
     nil
   end
 
+  def deadends
+    list = []
+
+    each_cell { |cell| list << cell if cell.links.count == 1 }
+
+    list
+  end
+
   def to_s
     output = "+" + "---+" * columns + "\n"
     each_row do |row|
